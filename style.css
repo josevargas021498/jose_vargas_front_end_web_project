@@ -58,3 +58,13 @@ img {
 #add-to-cart:hover {
     background-color: blue;
 }
+#buy-vehicle {
+    margin-left: 5px;
+    border: none;
+    padding: 15px;
+    background-color: black;
+    color: white;
+}
+#buy-vehicle:hover {
+    background-color: blue;
+}
