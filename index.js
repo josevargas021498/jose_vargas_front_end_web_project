@@ -52,27 +52,69 @@ PAGE_DATA = {
                         retailPrice: '$54,600'
                     }
                 }
+            ],
+            toyota: [
+                {
+                    vahicle: {
+                        imgUrl: '',
+                        year: '2014',
+                        make: 'Toyota',
+                        model: 'Tacoma',
+                        engine: '4.6 Eco-Boost',
+                        mileage: '19,000',
+                        description:
+                            'This is the lightest of the Toyotas, but do not over look it because it can haul just like a full sizre!\
+                        It has the 4.6 Charged engine that will make your regular gas burn hotter than lava!! The Hotter The BADDER!!! GET IT NOW \
+                        if you are looking for a lightweight, full sized crew-cab like this one!',
+                        retailPrice: '$49,400'
+                    }
+                }
             ]
         }
     ]
 };
 
-function showAllVehicles() {
-    var allBrands = $.parseJSON(PAGE_DATA),
-        html = '',
-        allVehicles = allBrands.vehicles;
-
-    for (var i in allVehicles) {
-        html += '<img src="' + i.imgUrl + '">';
+function pathToChevroletVehicles() {
+    var path = PAGE_DATA.vehicles;
+    for (var i = 0; i < path.length; i++) {
+        console.log(path[i]);
     }
-    return html;
+}
+function displayChevroletVehicles() {
+    var HTML = '<img src="' + '';
 }
 
-function draw() {
-    $('.main-content').append(showAllVehicles());
-}
+// function pathToAllVehicles() {
+//     var allBrands = PAGE_DATA.vehicles;
+//     for (var brand in allBrands) {
+//         var vehiclesInBrand = allBrands[brand];
+//         for (var vehicle in vehiclesInBrand) {
+//             var myVehicle = vehiclesInBrand[vehicle];
+//             console.log(myVehicle);
+//             for (var props in myVehicle) {
+//                 var myProps = myVehicle[props];
+//                 for (var i in myProps) {
+//                     var details = myProps[i];
+//                     // console.log(details);
+//                     return details;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// function displayAllVehicles(par) {
+//     var html = '<img src="' + par.imgUrl + '">';
+//     var html = '<h1>' + par.year + par.make + par.model + '</h1>';
+//     return html;
+// }
+
+// function draw() {
+//     $('.main-content').append(displayAllVehicles(pathToAllVehicles()));
+// }
 
 function main() {
-    draw();
+    // draw();
+    pathToChevroletVehicles();
 }
 $(main);
