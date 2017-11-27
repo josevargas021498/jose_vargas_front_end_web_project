@@ -84,137 +84,82 @@ var PAGE_DATA = {
         }
     ]
 };
+// --------------------------------------------------------------- SHOW SITE -------------------------------------------------------//
+function showSiteFront() {
+    var HTML = '<div class="site-front"> <h1> WELCOME TO VARGAS OFF-ROAD!</h1>';
+    HTML +=
+        '<h2> BROWSE OUR BRANDS ! <i id="arrow-right" class="fa fa-arrow-right" aria-hidden="true"></i></h2>';
 
-//---------------------------------------------------------ALL VEHICLES ----------------------------------------------------//
-function allVehicles() {
-    var path = PAGE_DATA.allTrucks;
+    HTML += '</div>';
 
-    for (var i in path) {
-        var vehicle = path[i];
+    $('.main-content').html(HTML);
+}
 
-        var html = '<img src="' + vehicle.imgUrl + '">';
-        html +=
-            '<h2>' +
-            ' ' +
-            vehicle.year +
-            ' ' +
-            vehicle.make +
-            ' ' +
-            vehicle.model +
-            ' ' +
-            '</h2>';
-        html +=
-            '<p> Features: <br>' +
-            vehicle.engine +
-            ' <br>' +
-            vehicle.mileage +
-            ' <br>' +
-            vehicle.description +
-            ' <br>' +
-            vehicle.retailPrice +
-            ' </p>';
-        html += '<h1> In Stock: ' + vehicle.stock + '</h1>';
-        html += '<button id="buy-vehicle"> BUY NOW! </button>';
+// ------------------------------------------------------ END SITE -----------------------------------------------------------------//
 
-        return html;
+// ------------------------------------------------------- CHEVROLET VEHICLES ------------------------------------------------------//
+function chevroletVehicles(vehicles) {
+    if (vehicles.make.includes('Chevrolet')) {
+        var HTML =
+            '<h2>' + vehicles.year + vehicles.make + vehicles.model + '</h2>';
+        HTML +=
+            '<h5> Features: <p>' +
+            vehicles.engine +
+            '<br>' +
+            vehicles.mileage +
+            '<br>' +
+            vehicles.description +
+            '</p></h5>';
+        HTML += '<h2>' + vehicles.retailPrice + '<br></h2>';
+        HTML += '<h1>' + vehicles.stock + '<h1>';
+
+        return HTML;
     }
-
-    // $('.main-content').html(html);
 }
+function filteredChevrolets() {
+    var vehicles = PAGE_DATA.allTrucks;
 
-//-------------------------------------------------------------------------------------------------------------//
-
-//----------------------------------------------------BUY---------------------------------------//
-function buyButtonHandler() {
-    $('#buy-vehicle').click(function() {
-        var path = PAGE_DATA.allTrucks;
-
-        for (var i in path) {
-            var vehicle = path[i];
-
-            if (vehicle.stock != 0) {
-                vehicle.stock -= 1;
-                draw();
+    for (var i in vehicles) {
+        var vehicle = vehicles[i];
+        //-------------------------------------//
+        var result = vehicles.filter(chevroletVehicles);
+        $('#chevy-link').on('click', function() {
+            for (var v in result) {
+                var filtered = result[v];
+                console.log(filtered);
             }
-        }
-    });
+        });
+    }
 }
 
-//----------------------------------------------------------MAIN FUNCTIONS ----------------------------------------------------------//
+// -------------------------------------------------------- FORD VEHICLES ---------------------------------------------------------//
+function fordVehicles(vehicles) {
+    return vehicles.make.includes('Ford');
+}
+function filteredfords() {
+    var vehicles = PAGE_DATA.allTrucks;
+
+    for (var i in vehicles) {
+        var vehicle = vehicles[i];
+        var result = vehicles.filter(fordVehicles);
+        $('#ford-link').on('click', function() {
+            for (var v in result) {
+                var filtered = result[v];
+                $('.main-content').html(filtered);
+            }
+        });
+    }
+}
+
+// ------------------------------------------------------------ END CHEVROLET VEHICLES ----------------------------------------------//
+
 function draw() {
-    $('.main-content').html(allVehicles());
-    buyButtonHandler();
+    showSiteFront();
+    filteredChevrolets();
 }
 
 function main() {
     draw();
+    // filteredChevrolets();
 }
-
-$(main);
-// function pathToAllVehicles() {
-//     var path = PAGE_DATA;
-//     for (var i in path) {
-//         var vehicle = path[i];
-//         console.log(vehicle);
-//         return vehicle;
-//     }
-// }
-// // function displayAllVehicles(vehicle) {
-// //     var HTML = '<img id="blackwidow" src="' + vehicle.imgUrl + '">';
-// //     HTML +=
-// //         '<h2> ' +
-// //         ' ' +
-// //         vehicle.year +
-// //         ' ' +
-// //         vehicle.make +
-// //         ' ' +
-// //         vehicle.model +
-// //         '</h2>';
-// //     HTML += '<h5> ' + vehicle.engine + '</h5>';
-// //     HTML += '<h5> ' + vehicle.mileage + '</h5>';
-// //     HTML += '<h5> ' + vehicle.description + '</h5>';
-// //     HTML += '<h1> ' + vehicle.retailPrice + '</h1>';
-// //     HTML += '<button id="buy">BUY NOW</button>';
-
-// //     return HTML;
-// // }
-// function allVehicles(vehicle) {
-//     var HTML = '<img id="blackwidow" src="' + vehicle.imgUrl + '">';
-//     HTML +=
-//         '<h2> ' +
-//         ' ' +
-//         vehicle.year +
-//         ' ' +
-//         vehicle.make +
-//         ' ' +
-//         vehicle.model +
-//         '</h2>';
-//     HTML += '<h5> ' + vehicle.engine + '</h5>';
-//     HTML += '<h5> ' + vehicle.mileage + '</h5>';
-//     HTML += '<h5> ' + vehicle.description + '</h5>';
-//     HTML += '<h1> ' + vehicle.retailPrice + '</h1>';
-//     HTML += '<button id="buy">BUY NOW</button>';
-
-//     return HTML;
-// }
-// function visualizeAllVehicles() {
-//     var html = PAGE_DATA.allTrucks.map(function(vehicle) {
-//         return allVehicles(vehicle);
-//     });
-// }
-
-// // function buy() {
-// //     $('#buy').on('click', function() {
-// //         $('#buy').attr('disabled', true);
-// //     });
-// // }
-
-// function draw(par) {
-//     $('.main-content').append(par);
-// }
-
-// function main() {
-//     draw(visualizeAllVehicles());
-// }
-
-// $('.main-content').on('load', main());
+$('body').on('load', main());

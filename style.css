@@ -48,7 +48,31 @@ img {
     border-color: black;
     border-width: 1px;
 }
-/* ADD TO CART ----------------------------------------- */
+
+/* Site Front -----------------------------------*/
+.site-front {
+    background-image: url(http://pictures.dealer.com/l/lewisvilleautoplexpreowned/0825/3212dbdca155ed34f9c0063a8f708da7x.jpg);
+    background-position-x: 50%;
+    background-size: cover;
+    height: 60em;
+    padding: 0.2px;
+}
+.site-front h1 {
+    padding: 20px;
+    text-align: center;
+    color: white;
+    background-color: black;
+}
+.site-front h2 {
+    padding: 20px;
+    text-align: center;
+    color: white;
+    background-color: black;
+    margin-top: 18em;
+}
+.site-front #arrow-right {
+    width: 3em;
+}
 
 /* BUY ----------------------------------------*/
 #buy-vehicle {
