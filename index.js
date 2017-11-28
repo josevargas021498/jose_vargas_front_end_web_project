@@ -309,10 +309,44 @@ function buyButtonHandler() {
     });
 }
 // ------------------------------------------------------------- POST -----------------------------------------------------------//
-function post() {}
+function postForm() {
+    var HTML = '<input id="img-url" placeHolder="Image URL: ">';
+    HTML += '<input id="p-year" placeholder="Year: ">';
+    HTML += '<input id="p-make" placeholder="Make: ">';
+    HTML += '<input id="p-mileage" placeholder="Mileage: ">';
+    HTML += '<input id="p-price" placeholder="Price: ">';
+    HTML += '<input id="p-submit" type="submit" placeholder="SUBMIT">';
+
+    return HTML;
+}
+function postFormVisualize() {
+    $('#post-link').on('click', function() {
+        $('.main-content').html(postForm());
+    });
+}
+///////////////////////////////////////////////
+
+function postFormValue() {
+    var img = $('#img-url').val();
+    var year = $('#p-year').val();
+    var make = $('#p-make').val();
+    var mileage = $('#p-mileage').val();
+    var price = $('#p-price').val();
+    var path = PAGE_DATA.allTrucks;
+    $('#p-submit').on('click', function() {
+        for (var i in path) {
+            path.append(img);
+            path.append(year);
+            path.append(make);
+            path.append(mileage);
+            path.append(price);
+        }
+    });
+}
 
 //---------------------------------------------------- END BUY BUTTON ----------------------------------------------------------//
 function draw() {
+    postFormVisualize();
     showSiteFront();
     filteredChevrolets();
     filteredFords();
