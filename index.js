@@ -100,7 +100,8 @@ function showSiteFront() {
 // ------------------------------------------------------- CHEVROLET VEHICLES ------------------------------------------------------//
 function chevroletVehicles(vehicles) {
     if (vehicles.make.includes('Chevrolet')) {
-        var HTML =
+        var HTML = '<img src="' + vehicles.imgUrl + '">';
+        HTML +=
             '<h2>' + vehicles.year + vehicles.make + vehicles.model + '</h2>';
         HTML +=
             '<h5> Features: <p>' +
@@ -112,6 +113,7 @@ function chevroletVehicles(vehicles) {
             '</p></h5>';
         HTML += '<h2>' + vehicles.retailPrice + '<br></h2>';
         HTML += '<h1>' + vehicles.stock + '<h1>';
+        HTML += '<button id="buy-vehicle"> BUY NOW! </button>';
 
         return HTML;
     }
@@ -119,17 +121,11 @@ function chevroletVehicles(vehicles) {
 function filteredChevrolets() {
     var vehicles = PAGE_DATA.allTrucks;
 
-    for (var i in vehicles) {
-        var vehicle = vehicles[i];
-        //-------------------------------------//
-        var result = vehicles.filter(chevroletVehicles);
-        $('#chevy-link').on('click', function() {
-            for (var v in result) {
-                var filtered = result[v];
-                console.log(filtered);
-            }
-        });
-    }
+    //-------------------------------------//
+    var result = vehicles.map(chevroletVehicles);
+    $('#chevy-link').on('click', function() {
+        $('.main-content').html(result);
+    });
 }
 
 // -------------------------------------------------------- FORD VEHICLES ---------------------------------------------------------//
@@ -153,6 +149,23 @@ function filteredfords() {
 
 // ------------------------------------------------------------ END CHEVROLET VEHICLES ----------------------------------------------//
 
+// ---------------------------------------------------- BUY BUTTON --------------------------------------------------------//
+function buyButtonHandler() {
+    $('#buy-vehicle').click(function() {
+        var path = PAGE_DATA.allTrucks;
+
+        for (var i in path) {
+            var vehicle = path[i];
+
+            if (vehicle.stock != 0) {
+                vehicle.stock -= 1;
+                draw();
+            }
+        }
+    });
+}
+
+//---------------------------------------------------- END BUY BUTTON ----------------------------------------------------------//
 function draw() {
     showSiteFront();
     filteredChevrolets();
